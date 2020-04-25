@@ -1,26 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import React, { lazy, Suspense } from "react";
+import { Route, Router, Switch } from "react-router";
+import { history } from "./history";
+const Index = lazy(() => import("./pages/index"));
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router history={history}>
+      <Switch>
+        <Suspense fallback={null}>
+          <Route path="/" exact component={Index} />
+        </Suspense>
+      </Switch>
+    </Router>
   );
-}
+};
 
 export default App;
